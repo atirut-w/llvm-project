@@ -1,6 +1,6 @@
 add_llvm_component_group(Z80)
 
-add_llvm_target(Z80
+add_llvm_target(Z80CodeGen
     Z80TargetMachine.cpp
 
     LINK_COMPONENTS
