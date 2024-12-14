@@ -1,3 +1,11 @@
+//===-- Z80TargetMachine.cpp - Define TargetMachine for Z80 ---------------===//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+
 #include "Z80TargetMachine.h"
 #include "TargetInfo/Z80TargetInfo.h"
 #include "llvm/ADT/StringRef.h"
