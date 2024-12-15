@@ -10,7 +10,11 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "Z80MCTargetDesc.h"
+#include "TargetInfo/Z80TargetInfo.h"
+
 #include "llvm/MC/MCRegisterInfo.h"
+#include "llvm/MC/TargetRegistry.h"
 #include "llvm/Support/Compiler.h"
 #include "llvm/TargetParser/Triple.h"
 
@@ -26,4 +30,6 @@ static MCRegisterInfo *createZ80MCRegisterInfo(const Triple &TT) {
   return X;
 }
 
-extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeZ80TargetMC() {}
+extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeZ80TargetMC() {
+  TargetRegistry::RegisterMCRegInfo(getTheZ80Target(), createZ80MCRegisterInfo);
+}
