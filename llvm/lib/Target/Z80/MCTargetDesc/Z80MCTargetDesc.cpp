@@ -13,15 +13,27 @@
 #include "Z80MCTargetDesc.h"
 #include "TargetInfo/Z80TargetInfo.h"
 
+#include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
 #include "llvm/MC/TargetRegistry.h"
 #include "llvm/Support/Compiler.h"
 #include "llvm/TargetParser/Triple.h"
 
+#define GET_INSTRINFO_MC_DESC
+#define ENABLE_INSTR_PREDICATE_VERIFIER
+#include "Z80GenInstrInfo.inc"
+
 #define GET_REGINFO_MC_DESC
 #include "Z80GenRegisterInfo.inc"
 
 using namespace llvm;
+
+MCInstrInfo *llvm::createZ80MCInstrInfo() {
+  MCInstrInfo *X = new MCInstrInfo();
+  InitZ80MCInstrInfo(X);
+
+  return X;
+}
 
 static MCRegisterInfo *createZ80MCRegisterInfo(const Triple &TT) {
   MCRegisterInfo *X = new MCRegisterInfo();

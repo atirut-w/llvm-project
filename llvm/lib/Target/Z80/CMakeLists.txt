@@ -3,6 +3,7 @@ add_llvm_component_group(Z80)
 set(LLVM_TARGET_DEFINITIONS Z80.td)
 
 tablegen(LLVM Z80GenRegisterInfo.inc -gen-register-info)
+tablegen(LLVM Z80GenInstrInfo.inc -gen-instr-info)
 
 add_public_tablegen_target(Z80CommonTableGen)
 
