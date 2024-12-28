@@ -13,16 +13,20 @@
 #include "Z80MCTargetDesc.h"
 #include "TargetInfo/Z80TargetInfo.h"
 
+#include "llvm/MC/MCAsmBackend.h"
+#include "llvm/MC/MCCodeEmitter.h"
+#include "llvm/MC/MCELFStreamer.h"
 #include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
+#include "llvm/MC/MCSubtargetInfo.h"
 #include "llvm/MC/TargetRegistry.h"
-#include "llvm/Support/Compiler.h"
-#include "llvm/TargetParser/SubtargetFeature.h"
-#include "llvm/TargetParser/Triple.h"
 
 #define GET_INSTRINFO_MC_DESC
 #define ENABLE_INSTR_PREDICATE_VERIFIER
 #include "Z80GenInstrInfo.inc"
+
+#define GET_SUBTARGETINFO_MC_DESC
+#include "Z80GenSubtargetInfo.inc"
 
 #define GET_REGINFO_MC_DESC
 #include "Z80GenRegisterInfo.inc"
@@ -43,7 +47,14 @@ static MCRegisterInfo *createZ80MCRegisterInfo(const Triple &TT) {
   return X;
 }
 
+static MCSubtargetInfo *createZ80MCSubtargetInfo(const Triple &TT,
+                                                 StringRef CPU, StringRef FS) {
+  return createZ80MCSubtargetInfoImpl(TT, CPU, /*TuneCPU*/ CPU, FS);
+}
+
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeZ80TargetMC() {
   TargetRegistry::RegisterMCInstrInfo(getTheZ80Target(), createZ80MCInstrInfo);
   TargetRegistry::RegisterMCRegInfo(getTheZ80Target(), createZ80MCRegisterInfo);
+  TargetRegistry::RegisterMCSubtargetInfo(getTheZ80Target(),
+                                          createZ80MCSubtargetInfo);
 }
