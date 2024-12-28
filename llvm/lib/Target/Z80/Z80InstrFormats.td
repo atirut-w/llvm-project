@@ -1,4 +1,4 @@
-class Z80Instr<dag ins, dag outs, string asmstr, list<dag> pattern>
+class Z80Instr<dag outs, dag ins, string asmstr, list<dag> pattern>
     : Instruction {
   let Namespace = "Z80";
 

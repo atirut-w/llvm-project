@@ -17,6 +17,7 @@
 #include "llvm/MC/MCRegisterInfo.h"
 #include "llvm/MC/TargetRegistry.h"
 #include "llvm/Support/Compiler.h"
+#include "llvm/TargetParser/SubtargetFeature.h"
 #include "llvm/TargetParser/Triple.h"
 
 #define GET_INSTRINFO_MC_DESC
@@ -43,5 +44,6 @@ static MCRegisterInfo *createZ80MCRegisterInfo(const Triple &TT) {
 }
 
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeZ80TargetMC() {
+  TargetRegistry::RegisterMCInstrInfo(getTheZ80Target(), createZ80MCInstrInfo);
   TargetRegistry::RegisterMCRegInfo(getTheZ80Target(), createZ80MCRegisterInfo);
 }
