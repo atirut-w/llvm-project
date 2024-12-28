@@ -12,6 +12,7 @@
 
 #include "Z80MCTargetDesc.h"
 #include "TargetInfo/Z80TargetInfo.h"
+#include "Z80MCAsmInfo.h"
 
 #include "llvm/MC/MCAsmBackend.h"
 #include "llvm/MC/MCCodeEmitter.h"
@@ -53,6 +54,8 @@ static MCSubtargetInfo *createZ80MCSubtargetInfo(const Triple &TT,
 }
 
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeZ80TargetMC() {
+  RegisterMCAsmInfo<Z80MCAsmInfo> X(getTheZ80Target());
+
   TargetRegistry::RegisterMCInstrInfo(getTheZ80Target(), createZ80MCInstrInfo);
   TargetRegistry::RegisterMCRegInfo(getTheZ80Target(), createZ80MCRegisterInfo);
   TargetRegistry::RegisterMCSubtargetInfo(getTheZ80Target(),

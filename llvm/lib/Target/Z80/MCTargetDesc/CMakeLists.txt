@@ -1,4 +1,5 @@
 add_llvm_component_library(LLVMZ80Desc
+    Z80MCAsmInfo.cpp
     Z80MCTargetDesc.cpp
 
     LINK_COMPONENTS
