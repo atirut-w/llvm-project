@@ -7,3 +7,5 @@ def Z80InstrInfo : InstrInfo;
 def Z80 : Target {
   let InstructionSet = Z80InstrInfo;
 }
+
+def : Processor<"z80", NoItineraries, []>;
