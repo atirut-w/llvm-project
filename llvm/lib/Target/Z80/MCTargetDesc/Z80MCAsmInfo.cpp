@@ -34,14 +34,12 @@ Z80MCAsmInfoELF::Z80MCAsmInfoELF(const Triple &T) {
   SeparatorString = nullptr;
   CommentString = ";";
   PrivateGlobalPrefix = PrivateLabelPrefix = "";
-  // Code16Directive = "assume\tadl = 0";
-  // Code24Directive = "assume\tadl = 1";
-  Code32Directive = Code64Directive = nullptr;
+  Code16Directive = Code24Directive = Code32Directive = Code64Directive = nullptr;
   AssemblerDialect = !Is16Bit;
   SupportsQuotedNames = false;
-  ZeroDirective = AscizDirective = nullptr;
+  ZeroDirective = nullptr;
   // BlockSeparator = " dup ";
-  AsciiDirective = "\t.ascii\t";
+  // AsciiDirective = "\t.ascii\t";
   ByteListDirective = Data8bitsDirective = "\t.byte\t";
   NumberLiteralSyntax = ANLS_PlainDecimal;
   CharacterLiteralSyntax = ACLS_SingleQuotes;
