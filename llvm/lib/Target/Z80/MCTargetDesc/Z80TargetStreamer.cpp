@@ -32,34 +32,34 @@ void Z80TargetAsmStreamer::emitLabel(MCSymbol *Symbol) {
 
 void Z80TargetAsmStreamer::emitAlign(Align Alignment) {
   if (auto Mask = Alignment.value() - 1)
-    OS << "\trb\t($$ - $) and " << Mask << '\n';
+    OS << "\t.skip\t($$ - $) and " << Mask << '\n';
 }
 
 void Z80TargetAsmStreamer::emitBlock(uint64_t NumBytes) {
   if (NumBytes)
-    OS << "\trb\t" << NumBytes << '\n';
+    OS << "\t.skip\t" << NumBytes << '\n';
 }
 
 void Z80TargetAsmStreamer::emitLocal(MCSymbol *Symbol) {
-  OS << "\tprivate\t";
-  Symbol->print(OS, MAI);
-  OS << '\n';
+  // OS << "\tprivate\t";
+  // Symbol->print(OS, MAI);
+  // OS << '\n';
 }
 
 void Z80TargetAsmStreamer::emitWeakGlobal(MCSymbol *Symbol) {
-  OS << "\tweak\t";
+  OS << "\t.weak\t";
   Symbol->print(OS, MAI);
   OS << '\n';
 }
 
 void Z80TargetAsmStreamer::emitGlobal(MCSymbol *Symbol) {
-  OS << "\tpublic\t";
+  OS << "\t.globl\t";
   Symbol->print(OS, MAI);
   OS << '\n';
 }
 
 void Z80TargetAsmStreamer::emitExtern(MCSymbol *Symbol) {
-  OS << "\textern\t";
+  OS << "\t.extern\t";
   Symbol->print(OS, MAI);
   OS << '\n';
 }
