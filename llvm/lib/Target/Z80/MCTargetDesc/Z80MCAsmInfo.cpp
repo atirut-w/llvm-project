@@ -41,7 +41,8 @@ Z80MCAsmInfoELF::Z80MCAsmInfoELF(const Triple &T) {
   SupportsQuotedNames = false;
   ZeroDirective = AscizDirective = nullptr;
   // BlockSeparator = " dup ";
-  AsciiDirective = ByteListDirective = Data8bitsDirective = "\t.byte\t";
+  AsciiDirective = "\t.ascii\t";
+  ByteListDirective = Data8bitsDirective = "\t.byte\t";
   NumberLiteralSyntax = ANLS_PlainDecimal;
   CharacterLiteralSyntax = ACLS_SingleQuotes;
   HasPairedDoubleQuoteStringConstants = true;
